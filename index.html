@@ -59,7 +59,67 @@
             display: block;
             margin: 0 auto;
         }
+     #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #contenidoModal {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+    }
+
+    #btnAceptar {
+      margin-top: 10px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Modal -->
+<div id="modal">
+  <div id="contenidoModal">
+    <h3>Términos y condiciones</h3>
+    <p><a href="PAGINA SECUNDARIA.html">Términos y Condiciones del Servicio de Cerrajería</a>.</p>
+
+    <label>
+      <input type="checkbox" id="terminos">
+      Acepto los términos
+    </label>
+    <br>
+
+    <button id="btnAceptar" onclick="aceptar()">Aceptar</button>
+  </div>
+</div>
+
+<script>
+  function aceptar() {
+    const checkbox = document.getElementById("terminos");
+
+    if (!checkbox.checked) {
+      alert("Debes aceptar los términos");
+      return;
+    }
+
+    document.getElementById("modal").style.display = "none";
+  }
+</script>
+
     </style>
+</body>
 </head>
 <body>
     <header>
@@ -94,6 +154,7 @@
 
         <section id="Terminos y Condiciones" class="card">
             <h2>Terminos y Condiciones</h2>
+
             <p><a href="PAGINA SECUNDARIA.html">Términos y Condiciones del Servicio de Cerrajería</a>.</p>
            
         </section>
