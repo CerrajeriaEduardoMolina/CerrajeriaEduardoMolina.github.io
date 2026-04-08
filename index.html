@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerrajeria Eduardo Molina</title>
+    <title>Cerrajería Eduardo Molina</title>
+    
+
     <style>
+        /* Fondo borroso */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-image: url('Carro.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(8px);
+            z-index: -1;
         }
 
         header {
-            background-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.8);
             color: white;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         nav {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.9);
+            display: flex;
+            justify-content: center;
         }
 
         nav a {
@@ -28,151 +49,222 @@
             padding: 14px 20px;
             display: inline-block;
             text-decoration: none;
+            transition: 0.3s;
         }
 
         nav a:hover {
             background-color: #575757;
+            border-radius: 5px;
         }
 
         main {
             padding: 20px;
+            max-width: 1000px;
+            margin: auto;
         }
 
-        footer {
-            background-color: #333;
-            color: white;
+        .section-title {
             text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Tarjetas de servicios */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         .card {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparente */
+            border-radius: 10px;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s;
         }
-          img {
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card i {
+            font-size: 40px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
             display: block;
-            margin: 0 auto;
+            width: 200px;
+            margin: 30px auto;
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
         }
-     #modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
 
-    #contenidoModal {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 300px;
-    }
+        .whatsapp-btn:hover {
+            background-color: #1ebe5d;
+        }
 
-    #btnAceptar {
-      margin-top: 10px;
-      padding: 10px;
-      cursor: pointer;
-    }
-  </style>
-</head>
+        footer {
+            background-color: rgba(51, 51, 51, 0.9);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
 
-<body>
+        /* Modal de términos */
+        #modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
 
-<!-- Modal -->
-<div id="modal">
-  <div id="contenidoModal">
-    <h3>Términos y condiciones</h3>
-    <p><a href="PAGINA SECUNDARIA.html">Términos y Condiciones del Servicio de Cerrajería</a>.</p>
+        #contenidoModal {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
 
-    <label>
-      <input type="checkbox" id="terminos">
-      Acepto los términos
-    </label>
-    <br>
+        #btnAceptar {
+            margin-top: 15px;
+            padding: 12px 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-    <button id="btnAceptar" onclick="aceptar()">Aceptar</button>
-  </div>
-</div>
-
-<script>
-  function aceptar() {
-    const checkbox = document.getElementById("terminos");
-
-    if (!checkbox.checked) {
-      alert("Debes aceptar los términos");
-      return;
-    }
-
-    document.getElementById("modal").style.display = "none";
-  }
-</script>
-
+        #btnAceptar:hover {
+            background-color: #45a049;
+        }
     </style>
-</body>
 </head>
 <body>
+
+    <!-- Modal de Términos -->
+    <div id="modal">
+        <div id="contenidoModal">
+            <h3>Términos y condiciones</h3>
+            <p><a href="PAGINA SECUNDARIA.html">Ver Términos y Condiciones del Servicio de Cerrajería</a></p>
+            <label>
+                <input type="checkbox" id="terminos"> Acepto los términos
+            </label>
+            <br>
+            <button id="btnAceptar" onclick="aceptar()">Aceptar</button>
+        </div>
+    </div>
+
     <header>
-        <h1>Bienvenido a la Cerrajeria Eduardo Molina</h1>
+        <h1>Cerrajería Eduardo Molina</h1>
+        <p>Seguridad y confianza para tu hogar y tu auto</p>
     </header>
 
     <nav>
-        <a href="#Servicios-de-Cerrajería">Servicios de Cerrajería</a>
+        <a href="#servicios">Servicios</a>
         <a href="#sobre-mi">Sobre mí</a>
-        <a href="#Terminos y Condiciones">Terminos y Condiciones</a>
+        <a href="#terminos-condiciones">Términos</a>
     </nav>
 
     <main>
-        <section id="Servicios-de-Cerrajería<" class="card">
-            <h2>Servicios de Cerrajería</h2>
-            <ul>
-             <li>Apertura de puertas</li>
-             <li>Cambio de combinacion</li>
-             <li>Duplicado de llaves</li>
-             <li>Duplicado de llaves de Auto</li>
-             <li>Instalación de cerraduras</li>
-             <li>Reparación de cerraduras</li>
-             <li>Apertura de autos</li>
-             
-            </ul>
-            
+        <!-- Sección de Servicios -->
+        <section id="servicios">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <i class="fas fa-key"></i>
+                    <h3>Duplicado de Llaves</h3>
+                    <p>Llaves residenciales, de seguridad, tetra, de punto,llaves decoradas etc.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-car"></i>
+                    <h3>Automotriz</h3>
+                    <p>Duplicado de llave Automotriz, programacion de llave-control, con chip , presencia, controles, hechura de llaves por perdida, apertura, etc.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-door-open"></i>
+                    <h3>Cerraduras</h3>
+                    <p> Venta, instalacion, reparacion y cambio de combinacion para cerraduras, etc </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-key-chain"></i>
+                    <h3>Llaveros</h3>
+                    <p>Venta de todo tipo de llaveros, Esmaltados, de piel, etc. </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Apertura de Cerraduras</h3>
+                    <p>Apertura de todo tipo de chapas.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Tlapaleria</h3>
+                    <p>Material de tlapaleria</p>
+                </div>
+            </div>
         </section>
 
-            <img src="Nora.jpg" width="200" alt="Imagen"> 
-            
-        </section>
-
-        <section class="seccion">
-            <a href="https://wa.me/5538052553?text=Hola%20quiero%20información" target="_blank" style="background-color:#25D366; margin: 75px; color:white; padding:40px 80px; text-decoration:none; border-radius:40px;">
-            WhatsApp
+        <!-- WhatsApp -->
+        <a href="https://wa.me/5538052553?text=Hola%20quiero%20información" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
 
+        <!-- Sobre mí -->
         <section id="sobre-mi" class="card">
-            <h2>Sobre mí</h2>
-            <p> informacion.</p>
+            <h2 class="section-title">Nosotros</h2>
+            <p>Con años de experiencia en cerrajería, nos enfocamos en brindar atencion confiable, resolver las necesidades de nuestros clientes, para su hogar, negocio o vehículo.</p>
         </section>
 
-        <section id="Terminos y Condiciones" class="card">
-            <h2>Terminos y Condiciones</h2>
-
-            <p><a href="PAGINA SECUNDARIA.html">Términos y Condiciones del Servicio de Cerrajería</a>.</p>
-           
+        <!-- Términos -->
+        <section id="terminos-condiciones" class="card">
+            <h2 class="section-title">Términos y Condiciones</h2>
+            <p><a href="PAGINA SECUNDARIA.html">Ver Términos y Condiciones del Servicio</a></p>
         </section>
-
     </main>
 
     <footer>
-        <p>© 2026 Cerrajeria Eduardo Molina. Todos los derechos reservados.</p>
+        <p>© 2026 Cerrajería Eduardo Molina. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        function aceptar() {
+            const checkbox = document.getElementById("terminos");
+            if (!checkbox.checked) {
+                alert("Debes aceptar los términos");
+                return;
+            }
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
 </body>
 </html>
